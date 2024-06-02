@@ -1,5 +1,7 @@
 import React from "react";
 import { useStorageState } from "@/hooks/useStorageState";
+import { AuthService } from "@/services/auth";
+import { router } from "expo-router";
 
 const AuthContext = React.createContext<{
   signIn: (username: string, password: string) => void;
@@ -28,11 +30,12 @@ export function SessionProvider(props: React.PropsWithChildren<{}>) {
   const [[isLoading, session], setSession] = useStorageState("session");
 
   const signIn = (username: string, password: string) => {
-    // Implementar a regra para logar
-
-    setSession("xxx"); // Replace "xxx" with the actual session token
-
-    console.log(session);
+    AuthService.signIn(username, password)
+      .then((res) => {
+        setSession(res.data.token);
+        router.replace("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

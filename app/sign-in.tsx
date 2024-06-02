@@ -5,7 +5,7 @@ import { Image, View, useColorScheme } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
 const Login: React.FC = () => {
-  const { session, isLoading, signIn } = useSession();
+  const { signIn } = useSession();
   const colorScheme = useColorScheme();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
@@ -55,18 +55,6 @@ const Login: React.FC = () => {
         }}
       >
         Entrar
-      </Button>
-      <Button
-        mode="text"
-        style={{ borderRadius: 10, marginTop: 10 }}
-        textColor={Colors[colorScheme ?? "light"].text}
-        theme={{
-          colors: {
-            primary: Colors[colorScheme ?? "light"].tint,
-          },
-        }}
-      >
-        Esqueci a senha
       </Button>
     </View>
   );
